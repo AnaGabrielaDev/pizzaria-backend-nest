@@ -8,14 +8,21 @@ export class UserService {
   async create(userData: UserCreateDTO) {
     const { email, name, password, phone } = userData;
 
-    const userAlreadyExists = await this.prismaService.user.findUnique({
+    const userAlreadyExists = await this.prismaService.user.findFirst({
       where: {
-        email,
+        OR: [
+          {
+            email,
+          },
+          {
+            phone,
+          },
+        ],
       },
     });
 
     if (userAlreadyExists) {
-      throw new ConflictException('email already exists');
+      throw new ConflictException('email or phone already exists');
     }
 
     const data = await this.prismaService.user.create({
