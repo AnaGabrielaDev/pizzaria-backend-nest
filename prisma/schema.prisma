@@ -21,6 +21,16 @@ model User {
   @@map("users")
 }
 
+model Product {
+  id          Int    @id @default(autoincrement())
+  name        String
+  image       String
+  description String
+  price       String
+
+  @@map("products")
+}
+
 enum Role {
   ADMIN
   USER
