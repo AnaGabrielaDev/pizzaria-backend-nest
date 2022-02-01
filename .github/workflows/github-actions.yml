@@ -1,9 +1,19 @@
 name: GitHub Actions
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  testing:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['16']
+    name: Node ${{ matrix.node }} sample
     steps:
-      - run: npm install
-      - run: eslint --fix
-      - run: jest
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm -g install yarn
+      - run: yarn
+      - run: yarn eslint --fix
+      - run: yarn jest --passWithNoTests
