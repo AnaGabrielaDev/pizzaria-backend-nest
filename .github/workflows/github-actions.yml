@@ -1,8 +1,7 @@
 name: GitHub Actions
 on: [push]
 env:
-  DATABASE_URL: ""
-
+  DATABASE_URL: postgres://atpmgikgxrslyi:dad32713d59e128602908fa0c2435be8ff7a08f0666bb3fbe70ae2c1a188c3ee@ec2-50-19-32-96.compute-1.amazonaws.com:5432/df22photd233tb?schema=test
 jobs:
   testing:
     runs-on: ubuntu-latest
