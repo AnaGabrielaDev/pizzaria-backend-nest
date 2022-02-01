@@ -1,5 +1,8 @@
 name: GitHub Actions
 on: [push]
+env:
+  DATABASE_URL: ""
+
 jobs:
   testing:
     runs-on: ubuntu-latest
