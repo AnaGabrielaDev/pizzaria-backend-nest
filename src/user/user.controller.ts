@@ -1,7 +1,10 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Param, Controller, Get, Post } from '@nestjs/common';
 import { UserCreateDTO } from './dtos/UserCreateDTO';
 import { UserService } from './user.service';
 
+type TFindUser = {
+  id: string;
+};
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -9,6 +12,11 @@ export class UserController {
   @Get()
   findAll() {
     return this.userService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param() { id }: TFindUser) {
+    return this.userService.findOne(Number(id));
   }
 
   @Post()
